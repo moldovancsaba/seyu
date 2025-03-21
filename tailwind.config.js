@@ -8,14 +8,14 @@ module.exports = {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#FF4747',
-          dark: '#E63E3E',
-          light: '#FF6B6B'
+          DEFAULT: '#2B8FE8',
+          dark: '#1B77C7',
+          light: '#4BA3EE'
         },
         secondary: {
-          DEFAULT: '#2A2A2A',
-          dark: '#1A1A1A',
-          light: '#3A3A3A'
+          DEFAULT: '#1A1C26',
+          dark: '#12141B',
+          light: '#222534'
         },
         neutral: {
           50: '#F9F9F9',
@@ -32,7 +32,7 @@ module.exports = {
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-primary': 'linear-gradient(45deg, #FF4747 0%, #FF6B6B 100%)',
+        'gradient-primary': 'linear-gradient(45deg, #2B8FE8 0%, #4BA3EE 100%)',
       },
       animation: {
         'gradient': 'gradient 15s ease infinite',
