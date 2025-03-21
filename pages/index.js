@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { FadeIn, ScaleIn, SlideInLeft, SlideInRight, Hover } from '../components/Animation';
-
+import content from '../content.json';
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -14,19 +14,21 @@ export default function Home() {
               <a href="/" className="text-white text-2xl font-bold">BFOUND</a>
             </SlideInLeft>
             <div className="hidden md:flex items-center space-x-8">
-              <SlideInRight delay={0.2}>
-                <a href="#services" className="text-white hover:text-white/80">Services</a>
-              </SlideInRight>
-              <SlideInRight delay={0.3}>
-                <a href="#" className="text-white hover:text-white/80">Log in</a>
-              </SlideInRight>
-              <SlideInRight delay={0.4}>
-                <Hover>
-                  <a href="#" className="px-6 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors">
-                    Get Started
-                  </a>
-                </Hover>
-              </SlideInRight>
+              {content.header.navigation.map((item, index) => (
+                index === content.header.navigation.length - 1 ? (
+                  <SlideInRight key={index} delay={0.2 + (index * 0.1)}>
+                    <Hover>
+                      <a href={item.href} className="px-6 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors">
+                        {item.label}
+                      </a>
+                    </Hover>
+                  </SlideInRight>
+                ) : (
+                  <SlideInRight key={index} delay={0.2 + (index * 0.1)}>
+                    <a href={item.href} className="text-white hover:text-white/80">{item.label}</a>
+                  </SlideInRight>
+                )
+              ))}
             </div>
             <button
               className="md:hidden text-white"
@@ -56,25 +58,25 @@ export default function Home() {
           <div className="max-w-4xl mx-auto text-center">
             <FadeIn>
               <h1 className="text-5xl md:text-7xl font-bold text-white mb-8">
-                Lost Something?<br />
-                <span className="text-blue-500">We'll Help You Find It</span>
+                {content.hero.title}<br />
+                <span className="text-blue-500">{content.hero.subtitle}</span>
               </h1>
             </FadeIn>
             <FadeIn delay={0.2}>
               <p className="text-xl md:text-2xl text-gray-300 mb-12 leading-relaxed">
-                Our advanced lost and found system helps you track and recover your lost items quickly and efficiently.
+                {content.hero.description}
               </p>
             </FadeIn>
             <FadeIn delay={0.4}>
               <div className="flex flex-col md:flex-row gap-6 justify-center">
                 <Hover>
                   <button className="px-8 py-4 bg-blue-600 text-white rounded-full text-lg font-semibold hover:bg-blue-700 transition-colors">
-                    Report Lost Item
+                    {content.hero.buttons[0].label}
                   </button>
                 </Hover>
                 <Hover>
                   <button className="px-8 py-4 bg-white/10 text-white rounded-full text-lg font-semibold hover:bg-white/20 transition-colors backdrop-blur-sm">
-                    How It Works
+                    {content.hero.buttons[1].label}
                   </button>
                 </Hover>
               </div>
@@ -89,24 +91,11 @@ export default function Home() {
         <div className="container mx-auto px-6">
           <ScaleIn>
             <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-16">
-              Advanced Lost & Found Features
+              {content.features.title}
             </h2>
           </ScaleIn>
           <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Real-Time Tracking",
-                description: "Track the status of your lost items in real-time with our advanced monitoring system."
-              },
-              {
-                title: "Secure Platform",
-                description: "Your information is protected with enterprise-grade security and encryption."
-              },
-              {
-                title: "Fast Recovery",
-                description: "Our efficient system helps you recover your lost items as quickly as possible."
-              }
-            ].map((feature, index) => (
+            {content.features.items.map((feature, index) => (
               <FadeIn key={index} delay={index * 0.2}>
                 <Hover>
                   <div className="p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-blue-500/50 transition-colors">
@@ -124,11 +113,7 @@ export default function Home() {
       <section className="py-20 bg-gradient-to-b from-blue-900/20 to-purple-900/20">
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-3 gap-8 text-center">
-            {[
-              { number: "95%", label: "Recovery Rate" },
-              { number: "24/7", label: "Support" },
-              { number: "100%", label: "Secure" }
-            ].map((stat, index) => (
+            {content.statistics.items.map((stat, index) => (
               <ScaleIn key={index} delay={index * 0.2}>
                 <div className="p-6">
                   <div className="text-4xl font-bold text-blue-500 mb-2">{stat.number}</div>
@@ -148,16 +133,16 @@ export default function Home() {
               <div className="text-2xl font-bold text-white mb-8 md:mb-0">BFOUND</div>
             </FadeIn>
             <div className="flex flex-wrap gap-8 text-gray-400">
-              {["About", "Privacy", "Terms", "Contact"].map((item, index) => (
+              {content.footer.links.map((item, index) => (
                 <FadeIn key={index} delay={index * 0.1}>
-                  <a href="#" className="hover:text-white transition-colors">{item}</a>
+                  <a href={item.href} className="hover:text-white transition-colors">{item.label}</a>
                 </FadeIn>
               ))}
             </div>
           </div>
           <FadeIn delay={0.4}>
             <div className="mt-8 pt-8 border-t border-white/10 text-center text-gray-500">
-              &copy; {new Date().getFullYear()} BFOUND. All rights reserved.
+              {content.footer.copyright.replace('{year}', new Date().getFullYear())}
             </div>
           </FadeIn>
         </div>

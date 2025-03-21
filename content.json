@@ -1,0 +1,90 @@
+{
+  "header": {
+    "logo": "BFOUND",
+    "navigation": [
+      {
+        "label": "Services",
+        "href": "#services"
+      },
+      {
+        "label": "Log in",
+        "href": "#"
+      },
+      {
+        "label": "Get Started",
+        "href": "#"
+      }
+    ]
+  },
+  "hero": {
+    "title": "Lost Something?",
+    "subtitle": "We'll Help You Find It",
+    "description": "Our advanced lost and found system helps you track and recover your lost items quickly and efficiently.",
+    "buttons": [
+      {
+        "label": "Report Lost Item",
+        "type": "primary"
+      },
+      {
+        "label": "How It Works",
+        "type": "secondary"
+      }
+    ]
+  },
+  "features": {
+    "title": "Advanced Lost & Found Features",
+    "items": [
+      {
+        "title": "Real-Time Tracking",
+        "description": "Track the status of your lost items in real-time with our advanced monitoring system."
+      },
+      {
+        "title": "Secure Platform",
+        "description": "Your information is protected with enterprise-grade security and encryption."
+      },
+      {
+        "title": "Fast Recovery",
+        "description": "Our efficient system helps you recover your lost items as quickly as possible."
+      }
+    ]
+  },
+  "statistics": {
+    "items": [
+      {
+        "number": "95%",
+        "label": "Recovery Rate"
+      },
+      {
+        "number": "24/7",
+        "label": "Support"
+      },
+      {
+        "number": "100%",
+        "label": "Secure"
+      }
+    ]
+  },
+  "footer": {
+    "logo": "BFOUND",
+    "links": [
+      {
+        "label": "About",
+        "href": "#"
+      },
+      {
+        "label": "Privacy",
+        "href": "#"
+      },
+      {
+        "label": "Terms",
+        "href": "#"
+      },
+      {
+        "label": "Contact",
+        "href": "#"
+      }
+    ],
+    "copyright": "© {year} BFOUND. All rights reserved."
+  }
+}
+
