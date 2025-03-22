@@ -31,15 +31,15 @@ export async function fetchSheetData() {
       items: [
         { 
           title: "Real-Time Stadium Moments",
-          description: "Bring fans closer with real-time, in-stadium experiences. Display their shared joy and support live on your digital surfaces."
+          value: "Bring fans closer with real-time, in-stadium experiences. Display their shared joy and support live on your digital surfaces."
         },
         {
           title: "Secure Sponsor Exposure",
-          description: "Give sponsors guaranteed visibility. Every fan photo includes built-in, brand-safe presence across all digital displays."
+          value: "Give sponsors guaranteed visibility. Every fan photo includes built-in, brand-safe presence across all digital displays."
         },
         {
           title: "Stronger Fan & Brand Bonds",
-          description: "Deepen connections both ways — with your fans and with sponsors — through our smart, scalable engagement platform."
+          value: "Deepen connections both ways — with your fans and with sponsors — through our smart, scalable engagement platform."
         }
       ],
       buttons: [
@@ -114,7 +114,9 @@ export async function fetchSheetData() {
     const featureItems = [];
     const featureButtons = [];
     const statItems = [];
+    const statButtons = [];
     const footerLinks = [];
+
     records.forEach(record => {
       const section = record.section?.toLowerCase();
       const key = record.key?.toLowerCase();
@@ -147,6 +149,7 @@ export async function fetchSheetData() {
           } else if (key === 'button') {
             heroButtons.push({
               label: record.label || "",
+              href: record.href || "#",
               type: record.type || "primary"
             });
           }
@@ -158,11 +161,12 @@ export async function fetchSheetData() {
           } else if (key === 'item') {
             featureItems.push({
               title: record.title || "",
-              description: record.description || ""
+              value: record.value || ""
             });
           } else if (key === 'button') {
             featureButtons.push({
               label: record.label || "",
+              href: record.href || "#",
               type: record.type || "primary"
             });
           }
@@ -170,7 +174,7 @@ export async function fetchSheetData() {
 
         case 'statistics':
           if (key === 'title') {
-            content.statistics.title = record.value || content.statistics.title;
+            content.statistics.title = record.title || content.statistics.title;
           } else if (key === 'item') {
             statItems.push({
               title: record.title || "",
@@ -178,17 +182,11 @@ export async function fetchSheetData() {
               value: record.value || ""
             });
           } else if (key === 'button') {
-            const buttonType = record.type || "primary";
-            const buttonHref = record.href || "#connect";
-            const buttonLabel = record.value || "";
-            
-            if (buttonLabel) {
-              content.statistics.buttons.push({
-                label: buttonLabel,
-                href: buttonHref,
-                type: buttonType
-              });
-            }
+            statButtons.push({
+              label: record.label || "",
+              href: record.href || "#connect",
+              type: record.type || "primary"
+            });
           }
           break;
 
@@ -213,8 +211,10 @@ export async function fetchSheetData() {
     if (featureItems.length > 0) content.features.items = featureItems;
     if (featureButtons.length > 0) content.features.buttons = featureButtons;
     if (statItems.length > 0) content.statistics.items = statItems;
+    if (statButtons.length > 0) content.statistics.buttons = statButtons;
     if (footerLinks.length > 0) content.footer.links = footerLinks;
 
+    console.log('Processed content:', JSON.stringify(content, null, 2));
     return content;
   } catch (error) {
     console.error('Error fetching sheet data:', error);
@@ -222,4 +222,3 @@ export async function fetchSheetData() {
     return defaultContent;
   }
 }
-
