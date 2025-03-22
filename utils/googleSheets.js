@@ -18,8 +18,8 @@ export async function fetchSheetData() {
       subtitle: "We will Help You Win Them Back",
       description: "Our real-time fan engagement platform entertains, connects, and tracks your audience instantly — so you never miss a moment or lose a fan again!",
       buttons: [
-        { label: "Report Lost Fans!", type: "primary" },
-        { label: "How we help you!", type: "secondary" }
+        { value: "Report Lost Fans!", href: "#", type: "primary" },
+        { value: "How we help you!", href: "#", type: "secondary" }
       ]
     },
     features: { 
@@ -39,8 +39,8 @@ export async function fetchSheetData() {
         }
       ],
       buttons: [
-        { label: "I want Fan Feed!", type: "primary" },
-        { label: "Cherish Connection!", type: "secondary" }
+        { value: "I want Fan Feed!", href: "#", type: "primary" },
+        { value: "Cherish Connection!", href: "#", type: "secondary" }
       ]
     },
     statistics: { 
@@ -149,7 +149,7 @@ export async function fetchSheetData() {
             content.hero.description = record.value || content.hero.description;
           } else if (key === 'button') {
             heroButtons.push({
-              label: record.value || "",
+              value: record.value || "",
               href: record.href || "#",
               type: record.type || "primary"
             });
@@ -166,7 +166,7 @@ export async function fetchSheetData() {
             });
           } else if (key === 'button') {
             featureButtons.push({
-              label: record.value || "",
+              value: record.value || "",
               href: record.href || "#",
               type: record.type || "primary"
             });
@@ -186,7 +186,7 @@ export async function fetchSheetData() {
             });
           } else if (key === 'button') {
             statButtons.push({
-              label: record.value || "",
+              value: record.value || "",
               href: record.href || "#connect",
               type: record.type || "primary"
             });
@@ -200,7 +200,7 @@ export async function fetchSheetData() {
             content.footer.copyright = record.value || content.footer.copyright;
           } else if (key === 'link') {
             footerLinks.push({
-              label: record.value || "",
+              value: record.value || "",
               href: record.href || "#"
             });
           }

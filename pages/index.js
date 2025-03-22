@@ -125,14 +125,14 @@ export default function Home({ content, error }) {
             <FadeIn delay={0.4}>
               <div className="flex flex-col md:flex-row gap-6 justify-center">
                 <Hover>
-                  <button className="px-8 py-4 bg-gradient-to-r from-[#F7870F] to-[#FECF01] text-[#343434] rounded-full text-lg font-semibold hover:shadow-lg transition-all">
-                    {content.hero.buttons[0].label}
-                  </button>
+                  <a href={content.hero.buttons[0].href} className="px-8 py-4 bg-gradient-to-r from-[#F7870F] to-[#FECF01] text-[#343434] rounded-full text-lg font-semibold hover:shadow-lg transition-all">
+                    {content.hero.buttons[0].value}
+                  </a>
                 </Hover>
                 <Hover>
-                  <button className="px-8 py-4 bg-white/10 text-white rounded-full text-lg font-semibold hover:bg-white/20 transition-colors backdrop-blur-sm">
-                    {content.hero.buttons[1].label}
-                  </button>
+                  <a href={content.hero.buttons[1].href} className="px-8 py-4 bg-white/10 text-white rounded-full text-lg font-semibold hover:bg-white/20 transition-colors backdrop-blur-sm">
+                    {content.hero.buttons[1].value}
+                  </a>
                 </Hover>
               </div>
             </FadeIn>
@@ -164,14 +164,14 @@ export default function Home({ content, error }) {
           <FadeIn delay={0.4}>
             <div className="flex flex-col md:flex-row gap-6 justify-center mt-12">
               <Hover>
-                <button className="px-8 py-4 bg-gradient-to-r from-[#F7870F] to-[#FECF01] text-[#343434] rounded-full text-lg font-semibold hover:shadow-lg transition-all">
-                  {content.features.buttons[0].label}
-                </button>
+                <a href={content.features.buttons[0].href} className="px-8 py-4 bg-gradient-to-r from-[#F7870F] to-[#FECF01] text-[#343434] rounded-full text-lg font-semibold hover:shadow-lg transition-all">
+                  {content.features.buttons[0].value}
+                </a>
               </Hover>
               <Hover>
-                <button className="px-8 py-4 bg-white/10 text-white rounded-full text-lg font-semibold hover:bg-white/20 transition-colors backdrop-blur-sm">
-                  {content.features.buttons[1].label}
-                </button>
+                <a href={content.features.buttons[1].href} className="px-8 py-4 bg-white/10 text-white rounded-full text-lg font-semibold hover:bg-white/20 transition-colors backdrop-blur-sm">
+                  {content.features.buttons[1].value}
+                </a>
               </Hover>
             </div>
           </FadeIn>
