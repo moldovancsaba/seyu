@@ -41,36 +41,45 @@ export default function Home({ content, error }) {
         <link rel="icon" href="/images/favicon.ico" />
       </Head>
       {/* Header */}
-      <header className="fixed w-full z-50 backdrop-blur-sm bg-gradient-to-r from-[#110C9A]/90 to-[#9B0F7A]/90">
-        <nav className="container mx-auto px-6 py-4">
+      <header className="absolute w-full z-50">
+        <nav className="container mx-auto px-6 py-6">
           <div className="flex items-center justify-between">
-            <SlideInLeft>
-              <a href="/" className="text-white flex items-center">
-                <Image 
-                  src={Logo} 
-                  alt={content.header.logo} 
-                  width={180} 
-                  height={40} 
-                  className="h-[24px] md:h-[40px] w-auto" 
-                  priority 
-                />
-              </a>
-            </SlideInLeft>
+            <div className="flex-shrink-0">
+              <SlideInLeft>
+                <a href="/" className="text-white flex items-center">
+                  <Image 
+                    src={content.header.logo || Logo} 
+                    alt="Seyu Logo" 
+                    width={180} 
+                    height={40} 
+                    className="h-[24px] md:h-[40px] w-auto"
+                    priority 
+                  />
+                </a>
+              </SlideInLeft>
+            </div>
             <div className="hidden md:flex items-center space-x-8">
               {content.header.navigation.map((item, index) => (
-                index === content.header.navigation.length - 1 ? (
-                  <SlideInRight key={index} delay={0.2 + (index * 0.1)}>
-                    <Hover>
-                      <a href={item.href} className="px-6 py-2 bg-gradient-to-r from-[#F7870F] to-[#FECF01] text-[#343434] font-semibold rounded-full hover:shadow-lg transition-all">
-                        {item.label}
-                      </a>
-                    </Hover>
-                  </SlideInRight>
-                ) : (
-                  <SlideInRight key={index} delay={0.2 + (index * 0.1)}>
-                    <a href={item.href} className="text-white hover:text-white/80">{item.label}</a>
-                  </SlideInRight>
-                )
+                <SlideInRight key={index} delay={0.2 + (index * 0.1)}>
+                  <a
+                    href={item.href}
+                    className="text-gray-300 hover:text-white transition-colors"
+                  >
+                    {item.value}
+                  </a>
+                </SlideInRight>
+              ))}
+              {content.header.buttons && content.header.buttons.map((button, index) => (
+                <SlideInRight key={`button-${index}`} delay={0.2 + ((content.header.navigation.length + index) * 0.1)}>
+                  <Hover>
+                    <a
+                      href={button.href}
+                      className="px-4 py-2 bg-[#F7870F] text-white rounded-full font-semibold hover:bg-[#FECF01] transition-colors"
+                    >
+                      {button.value}
+                    </a>
+                  </Hover>
+                </SlideInRight>
               ))}
             </div>
             <button
@@ -86,7 +95,10 @@ export default function Home({ content, error }) {
             <FadeIn>
               <div className="md:hidden mt-4 pb-4">
                 {content.header.navigation.map((item, index) => (
-                  <a key={index} href={item.href} className="block text-white py-2">{item.label}</a>
+                  <a key={index} href={item.href} className="block text-white py-2">{item.value}</a>
+                ))}
+                {content.header.buttons && content.header.buttons.map((button, index) => (
+                  <a key={`button-${index}`} href={button.href} className="block text-white py-2 font-semibold">{button.value}</a>
                 ))}
               </div>
             </FadeIn>
@@ -169,16 +181,41 @@ export default function Home({ content, error }) {
       {/* Statistics Section */}
       <section className="py-20 bg-gradient-to-b from-[#110C9A]/20 to-[#9B0F7A]/20">
         <div className="container mx-auto px-6">
+          <ScaleIn>
+            <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-16">
+              {content.statistics.title}
+            </h2>
+          </ScaleIn>
           <div className="grid md:grid-cols-3 gap-8 text-center">
             {content.statistics.items.map((stat, index) => (
               <ScaleIn key={index} delay={index * 0.2}>
-                <div className="p-6">
-                  <div className="text-4xl font-bold text-white mb-2">{stat.number}</div>
-                  <div className="text-gray-300">{stat.label}</div>
+                <div className="p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-[#F7870F]/50 transition-colors">
+                  <div className="text-4xl font-bold text-white mb-2">{stat.title}</div>
+                  <div className="text-xl font-semibold text-gray-200 mb-3">{stat.subtitle}</div>
+                  <div className="text-gray-300">{stat.value}</div>
                 </div>
               </ScaleIn>
             ))}
           </div>
+          {content.statistics.buttons && content.statistics.buttons.length > 0 && (
+            <FadeIn delay={0.4}>
+              <div className="flex flex-col md:flex-row gap-6 justify-center mt-12">
+                {content.statistics.buttons.map((button, index) => (
+                  <Hover key={index}>
+                    <a 
+                      href={button.href || "#"} 
+                      className={index === 0 ? 
+                        "px-8 py-4 bg-gradient-to-r from-[#F7870F] to-[#FECF01] text-[#343434] rounded-full text-lg font-semibold hover:shadow-lg transition-all" : 
+                        "px-8 py-4 bg-white/10 text-white rounded-full text-lg font-semibold hover:bg-white/20 transition-colors backdrop-blur-sm"
+                      }
+                    >
+                      {button.value}
+                    </a>
+                  </Hover>
+                ))}
+              </div>
+            </FadeIn>
+          )}
         </div>
       </section>
 

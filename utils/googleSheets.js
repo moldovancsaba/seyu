@@ -10,11 +10,8 @@ export async function fetchSheetData() {
     },
     header: { 
       logo: "/images/seyu_logo_horizontal_white.PNG",
-      navigation: [
-        { label: "Seyu Services", href: "#services" },
-        { label: "Log in", href: "#login" },
-        { label: "Get Started", href: "#getstarted" }
-      ] 
+      navigation: [],
+      buttons: []
     },
     hero: { 
       title: "Lost the way to attract Fans?",
@@ -129,10 +126,15 @@ export async function fetchSheetData() {
 
         case 'header':
           if (key === 'logo') {
-            content.header.logo = record.label || content.header.logo;
+            content.header.logo = record.value || content.header.logo;
           } else if (key === 'navigation_item') {
-            navItems.push({
-              label: record.label || "",
+            content.header.navigation.push({
+              value: record.value || "",
+              href: record.href || "#"
+            });
+          } else if (key === 'button') {
+            content.header.buttons.push({
+              value: record.value || "",
               href: record.href || "#"
             });
           }
