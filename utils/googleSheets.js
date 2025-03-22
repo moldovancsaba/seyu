@@ -175,9 +175,11 @@ export async function fetchSheetData() {
           if (key === 'title') {
             content.statistics.title = record.title || content.statistics.title;
           } else if (key === 'item') {
+            // Split the subtitle field which contains both title and subtitle
+            const [itemTitle, itemSubtitle] = (record.subtitle || "").split('\n');
             statItems.push({
-              title: record.title || "",
-              subtitle: record.subtitle || "",
+              title: itemTitle || "",
+              subtitle: itemSubtitle || "",
               value: record.value || ""
             });
           } else if (key === 'button') {
