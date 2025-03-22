@@ -103,7 +103,7 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section id="services" className="py-20 relative">
+      <section id="services" className="py-20 relative bg-[#110C9A]">
         <div className="container mx-auto px-6">
           <ScaleIn>
             <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-16">
@@ -132,7 +132,7 @@ export default function Home() {
             {content.statistics.items.map((stat, index) => (
               <ScaleIn key={index} delay={index * 0.2}>
                 <div className="p-6">
-                  <div className="text-4xl font-bold text-blue-500 mb-2">{stat.number}</div>
+                  <div className="text-4xl font-bold text-white mb-2">{stat.number}</div>
                   <div className="text-gray-300">{stat.label}</div>
                 </div>
               </ScaleIn>
@@ -142,7 +142,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gradient-to-r from-[#110C9A]/90 to-[#9B0F7A]/90 py-12 mt-20">
+      <footer className="bg-[#110C9A] py-12 mt-20">
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <FadeIn>
