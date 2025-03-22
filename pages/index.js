@@ -11,7 +11,7 @@ export default function Home() {
         <nav className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <SlideInLeft>
-              <a href="/" className="text-white text-2xl font-bold">BFOUND</a>
+              <a href="/" className="text-white text-2xl font-bold">{content.header.logo}</a>
             </SlideInLeft>
             <div className="hidden md:flex items-center space-x-8">
               {content.header.navigation.map((item, index) => (
@@ -130,7 +130,7 @@ export default function Home() {
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <FadeIn>
-              <div className="text-2xl font-bold text-white mb-8 md:mb-0">BFOUND</div>
+              <div className="text-2xl font-bold text-white mb-8 md:mb-0">{content.footer.logo}</div>
             </FadeIn>
             <div className="flex flex-wrap gap-8 text-gray-400">
               {content.footer.links.map((item, index) => (
