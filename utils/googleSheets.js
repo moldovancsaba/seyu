@@ -48,20 +48,28 @@ export async function fetchSheetData() {
       ]
     },
     statistics: { 
+      title: "Proven Results That Matter",
       items: [
         { 
-          number: "35%",
-          label: "Boost in Live Fan Engagement - Real-time interactions on stadium screens drive deeper, measurable audience participation."
+          title: "35%",
+          subtitle: "Boost in Live Fan Engagement",
+          value: "Real-time interactions on stadium screens drive deeper measurable audience participation"
         },
         {
-          number: "360°",
-          label: "Fully Automated Brand Activation - Turn-key solution for ATL and BTL campaigns — no extra work, maximum impact."
+          title: "360°",
+          subtitle: "Fully Automated Brand Activation",
+          value: "Turn-key solution for ATL and BTL campaigns — no extra work maximum impact"
         },
         {
-          number: "100/100",
-          label: "Curated Fan-Generated Content - Every image is reviewed and brand-safe, ready for instant, on-screen display."
+          title: "100%",
+          subtitle: "Curated Fan-Generated Content",
+          value: "Every image is reviewed and brand-safe ready for instant on-screen display"
         }
-      ] 
+      ],
+      buttons: [
+        { label: "See Results in Action", href: "#connect", type: "primary" },
+        { label: "Book a Demo", href: "#connect", type: "secondary" }
+      ]
     },
     footer: { 
       logo: "Seyu",
@@ -161,11 +169,26 @@ export async function fetchSheetData() {
           break;
 
         case 'statistics':
-          if (key === 'item') {
+          if (key === 'title') {
+            content.statistics.title = record.value || content.statistics.title;
+          } else if (key === 'item') {
             statItems.push({
-              number: record.number || "",
-              label: record.label || ""
+              title: record.title || "",
+              subtitle: record.subtitle || "",
+              value: record.value || ""
             });
+          } else if (key === 'button') {
+            const buttonType = record.type || "primary";
+            const buttonHref = record.href || "#connect";
+            const buttonLabel = record.value || "";
+            
+            if (buttonLabel) {
+              content.statistics.buttons.push({
+                label: buttonLabel,
+                href: buttonHref,
+                type: buttonType
+              });
+            }
           }
           break;
 

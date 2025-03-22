@@ -1,7 +1,7 @@
 import React from "react";
 
-const Statistics = ({ content }) => {
-  const { title, items, buttons } = content.statistics;
+const Features = ({ content }) => {
+  const { title, items, buttons } = content.features;
 
   return (
     <div className="bg-white py-24 sm:py-32">
@@ -15,17 +15,12 @@ const Statistics = ({ content }) => {
           <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3">
             {items.map((item, index) => (
               <div key={index} className="flex flex-col">
-                <div className="p-6 rounded-2xl bg-white shadow-sm border border-gray-100 hover:border-primary-500/50 transition-colors h-full text-center">
-                  <dt className="mb-4">
-                    <div className="text-4xl font-bold text-primary-600 mb-2">
-                      {item.title}
-                    </div>
-                    <div className="text-lg font-semibold text-gray-900">
-                      {item.subtitle}
-                    </div>
+                <div className="p-6 rounded-2xl bg-white shadow-sm border border-gray-100 hover:border-primary-500/50 transition-colors h-full">
+                  <dt className="text-base font-semibold leading-7 text-gray-900">
+                    {item.title}
                   </dt>
-                  <dd className="mt-4 text-base leading-7 text-gray-600">
-                    {item.value}
+                  <dd className="mt-4 flex flex-auto flex-col text-base leading-7 text-gray-600">
+                    <p className="flex-auto">{item.value}</p>
                   </dd>
                 </div>
               </div>
@@ -54,4 +49,4 @@ const Statistics = ({ content }) => {
   );
 };
 
-export default Statistics;
+export default Features;
