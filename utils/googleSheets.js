@@ -1,7 +1,6 @@
 import fetch from 'node-fetch';
 import { parse } from 'csv-parse/sync';
 
-// Single sheet URL - replace with your published sheet URL when you create the combined sheet
 const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSdbki4EdJ_AIkBZXGw3lzmIQTck3jV8HmeMV7UHfKw5v3V3MZxE6eI85KkssJm1XG72JHnVHW3YCJB/pub?gid=1850789130&single=true&output=csv';
 
 export async function fetchSheetData() {
@@ -98,7 +97,7 @@ export async function fetchSheetData() {
       skip_empty_lines: true
     });
 
-    console.log(`Fetched ${records.length} records from sheet`);
+    console.log(\`Fetched \${records.length} records from sheet\`);
 
     if (!records || records.length === 0) {
       console.warn('No data in sheet, using default content');
@@ -148,7 +147,7 @@ export async function fetchSheetData() {
             content.hero.description = record.value || content.hero.description;
           } else if (key === 'button') {
             heroButtons.push({
-              label: record.label || "",
+              label: record.value || "",
               href: record.href || "#",
               type: record.type || "primary"
             });
@@ -165,7 +164,7 @@ export async function fetchSheetData() {
             });
           } else if (key === 'button') {
             featureButtons.push({
-              label: record.label || "",
+              label: record.value || "",
               href: record.href || "#",
               type: record.type || "primary"
             });
@@ -177,13 +176,13 @@ export async function fetchSheetData() {
             content.statistics.title = record.title || content.statistics.title;
           } else if (key === 'item') {
             statItems.push({
-              title: record.subtitle || "",
+              title: record.title || "",
               subtitle: record.subtitle || "",
               value: record.value || ""
             });
           } else if (key === 'button') {
             statButtons.push({
-              label: record.label || "",
+              label: record.value || "",
               href: record.href || "#connect",
               type: record.type || "primary"
             });
