@@ -1,11 +1,15 @@
 import { useState } from 'react';
 import { FadeIn, ScaleIn, SlideInLeft, SlideInRight, Hover } from '../components/Animation';
+import Head from 'next/head';
 import content from '../content.json';
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-[#0D0D0D]">
+      <Head>
+        <title>{content.meta.title}</title>
+      </Head>
       {/* Header */}
       <header className="fixed w-full z-50 backdrop-blur-sm bg-black/20">
         <nav className="container mx-auto px-6 py-4">
@@ -42,9 +46,9 @@ export default function Home() {
           {isMenuOpen && (
             <FadeIn>
               <div className="md:hidden mt-4 pb-4">
-                <a href="#services" className="block text-white py-2">Services</a>
-                <a href="#" className="block text-white py-2">Log in</a>
-                <a href="#" className="block text-white py-2">Get Started</a>
+                {content.header.navigation.map((item, index) => (
+                  <a key={index} href={item.href} className="block text-white py-2">{item.label}</a>
+                ))}
               </div>
             </FadeIn>
           )}
