@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { FadeIn, ScaleIn, SlideInLeft, SlideInRight, Hover } from '../components/Animation';
 import Head from 'next/head';
 import Image from 'next/image';
-import Logo from '../images/seyu_logo.png';
+import Logo from '../images/seyu_logo_horizontal_white.PNG';
 import content from '../content.json';
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -22,9 +22,9 @@ export default function Home() {
                 <Image 
                   src={Logo} 
                   alt={content.header.logo} 
-                  width={40} 
+                  width={180} 
                   height={40} 
-                  className="w-[24px] h-[24px] md:w-[40px] md:h-[40px]" 
+                  className="h-[24px] md:h-[40px] w-auto" 
                   priority 
                 />
               </a>
@@ -122,6 +122,20 @@ export default function Home() {
               </FadeIn>
             ))}
           </div>
+          <FadeIn delay={0.4}>
+            <div className="flex flex-col md:flex-row gap-6 justify-center mt-12">
+              <Hover>
+                <button className="px-8 py-4 bg-gradient-to-r from-[#F7870F] to-[#FECF01] text-[#343434] rounded-full text-lg font-semibold hover:shadow-lg transition-all">
+                  {content.features.buttons[0].label}
+                </button>
+              </Hover>
+              <Hover>
+                <button className="px-8 py-4 bg-white/10 text-white rounded-full text-lg font-semibold hover:bg-white/20 transition-colors backdrop-blur-sm">
+                  {content.features.buttons[1].label}
+                </button>
+              </Hover>
+            </div>
+          </FadeIn>
         </div>
       </section>
 
@@ -150,9 +164,9 @@ export default function Home() {
                 <Image 
                   src={Logo} 
                   alt={content.footer.logo} 
-                  width={40} 
+                  width={180} 
                   height={40} 
-                  className="w-[24px] h-[24px] md:w-[40px] md:h-[40px]" 
+                  className="h-[24px] md:h-[40px] w-auto" 
                 />
               </div>
             </FadeIn>

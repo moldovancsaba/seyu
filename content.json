@@ -3,10 +3,10 @@
     "title": "Seyu - Attract Fans!"
   },
   "header": {
-    "logo": "SEYU",
+    "logo": "/images/seyu_logo_horizontal_white.PNG",
     "navigation": [
       {
-        "label": "Services",
+        "label": "Seyu Services",
         "href": "#services"
       },
       {
@@ -48,6 +48,16 @@
       {
         "title": "Strong Relationship",
         "description": "Our efficient system helps you build stronger relationships both way to the B2C audience and the B2B sponsors and marketers."
+      }
+    ],
+    "buttons": [
+      {
+        "label": "Report Lost Fans!",
+        "type": "primary"
+      },
+      {
+        "label": "How we help you!",
+        "type": "secondary"
       }
     ]
   },
