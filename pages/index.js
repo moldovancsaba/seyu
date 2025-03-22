@@ -19,7 +19,14 @@ export default function Home() {
           <div className="flex items-center justify-between">
             <SlideInLeft>
               <a href="/" className="text-white flex items-center">
-                <Image src={Logo} alt={content.header.logo} width={120} height={40} priority />
+                <Image 
+                  src={Logo} 
+                  alt={content.header.logo} 
+                  width={60} 
+                  height={20} 
+                  className="w-[36px] h-[12px] md:w-[60px] md:h-[20px]" 
+                  priority 
+                />
               </a>
             </SlideInLeft>
             <div className="hidden md:flex items-center space-x-8">
@@ -140,7 +147,13 @@ export default function Home() {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <FadeIn>
               <div className="mb-8 md:mb-0">
-                <Image src={Logo} alt={content.footer.logo} width={120} height={40} />
+                <Image 
+                  src={Logo} 
+                  alt={content.footer.logo} 
+                  width={60} 
+                  height={20} 
+                  className="w-[36px] h-[12px] md:w-[60px] md:h-[20px]" 
+                />
               </div>
             </FadeIn>
             <div className="flex flex-wrap gap-8 text-gray-400">
