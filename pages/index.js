@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { FadeIn, ScaleIn, SlideInLeft, SlideInRight, Hover } from '../components/Animation';
 import Head from 'next/head';
+import Image from 'next/image';
+import Logo from '../images/seyu_logo.png';
 import content from '../content.json';
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -9,13 +11,16 @@ export default function Home() {
     <div className="min-h-screen bg-[#0D0D0D]">
       <Head>
         <title>{content.meta.title}</title>
+        <link rel="icon" href="/images/favicon.ico" />
       </Head>
       {/* Header */}
       <header className="fixed w-full z-50 backdrop-blur-sm bg-black/20">
         <nav className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <SlideInLeft>
-              <a href="/" className="text-white text-2xl font-bold">{content.header.logo}</a>
+              <a href="/" className="text-white flex items-center">
+                <Image src={Logo} alt={content.header.logo} width={120} height={40} priority />
+              </a>
             </SlideInLeft>
             <div className="hidden md:flex items-center space-x-8">
               {content.header.navigation.map((item, index) => (
@@ -134,7 +139,9 @@ export default function Home() {
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <FadeIn>
-              <div className="text-2xl font-bold text-white mb-8 md:mb-0">{content.footer.logo}</div>
+              <div className="mb-8 md:mb-0">
+                <Image src={Logo} alt={content.footer.logo} width={120} height={40} />
+              </div>
             </FadeIn>
             <div className="flex flex-wrap gap-8 text-gray-400">
               {content.footer.links.map((item, index) => (
