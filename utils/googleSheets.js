@@ -1,126 +1,104 @@
 import fetch from 'node-fetch';
 import { parse } from 'csv-parse/sync';
 
-// Individual sheet URLs - replace these with your actual published sheet URLs
-const SHEET_URLS = {
-  META: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSdbki4EdJ_AIkBZXGw3lzmIQTck3jV8HmeMV7UHfKw5v3V3MZxE6eI85KkssJm1XG72JHnVHW3YCJB/pub?gid=0&single=true&output=csv',
-  HEADER: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSdbki4EdJ_AIkBZXGw3lzmIQTck3jV8HmeMV7UHfKw5v3V3MZxE6eI85KkssJm1XG72JHnVHW3YCJB/pub?gid=1&single=true&output=csv',
-  HERO: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSdbki4EdJ_AIkBZXGw3lzmIQTck3jV8HmeMV7UHfKw5v3V3MZxE6eI85KkssJm1XG72JHnVHW3YCJB/pub?gid=2&single=true&output=csv',
-  FEATURES: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSdbki4EdJ_AIkBZXGw3lzmIQTck3jV8HmeMV7UHfKw5v3V3MZxE6eI85KkssJm1XG72JHnVHW3YCJB/pub?gid=3&single=true&output=csv',
-  STATISTICS: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSdbki4EdJ_AIkBZXGw3lzmIQTck3jV8HmeMV7UHfKw5v3V3MZxE6eI85KkssJm1XG72JHnVHW3YCJB/pub?gid=4&single=true&output=csv',
-  FOOTER: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSdbki4EdJ_AIkBZXGw3lzmIQTck3jV8HmeMV7UHfKw5v3V3MZxE6eI85KkssJm1XG72JHnVHW3YCJB/pub?gid=5&single=true&output=csv'
-};
+// Single sheet URL - replace with your published sheet URL when you create the combined sheet
+const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSdbki4EdJ_AIkBZXGw3lzmIQTck3jV8HmeMV7UHfKw5v3V3MZxE6eI85KkssJm1XG72JHnVHW3YCJB/pub?gid=1850789130&single=true&output=csv';
 
-// Fallback to the original combined sheet URL
-const COMBINED_SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSdbki4EdJ_AIkBZXGw3lzmIQTck3jV8HmeMV7UHfKw5v3V3MZxE6eI85KkssJm1XG72JHnVHW3YCJB/pub?output=csv';
-/**
- * Fetches data from a single sheet URL
- * @param {string} url - The URL of the sheet to fetch
- * @returns {Array} - Array of parsed records from the sheet
- */
-async function fetchSingleSheet(url) {
+export async function fetchSheetData() {
+  const defaultContent = {
+    meta: { 
+      title: "Seyu - Attract Fans!" 
+    },
+    header: { 
+      logo: "/images/seyu_logo_horizontal_white.PNG",
+      navigation: [
+        { label: "Seyu Services", href: "#services" },
+        { label: "Log in", href: "#login" },
+        { label: "Get Started", href: "#getstarted" }
+      ] 
+    },
+    hero: { 
+      title: "Lost the way to attract Fans?",
+      subtitle: "We will Help You Win Them Back",
+      description: "Our real-time fan engagement platform entertains, connects, and tracks your audience instantly — so you never miss a moment or lose a fan again!",
+      buttons: [
+        { label: "Report Lost Fans!", type: "primary" },
+        { label: "How we help you!", type: "secondary" }
+      ]
+    },
+    features: { 
+      title: "Next-Level Fan Engagement",
+      items: [
+        { 
+          title: "Real-Time Stadium Moments",
+          description: "Bring fans closer with real-time, in-stadium experiences. Display their shared joy and support live on your digital surfaces."
+        },
+        {
+          title: "Secure Sponsor Exposure",
+          description: "Give sponsors guaranteed visibility. Every fan photo includes built-in, brand-safe presence across all digital displays."
+        },
+        {
+          title: "Stronger Fan & Brand Bonds",
+          description: "Deepen connections both ways — with your fans and with sponsors — through our smart, scalable engagement platform."
+        }
+      ],
+      buttons: [
+        { label: "I want Fan Feed!", type: "primary" },
+        { label: "Cherish Connection!", type: "secondary" }
+      ]
+    },
+    statistics: { 
+      items: [
+        { 
+          number: "35%",
+          label: "Boost in Live Fan Engagement - Real-time interactions on stadium screens drive deeper, measurable audience participation."
+        },
+        {
+          number: "360°",
+          label: "Fully Automated Brand Activation - Turn-key solution for ATL and BTL campaigns — no extra work, maximum impact."
+        },
+        {
+          number: "100/100",
+          label: "Curated Fan-Generated Content - Every image is reviewed and brand-safe, ready for instant, on-screen display."
+        }
+      ] 
+    },
+    footer: { 
+      logo: "Seyu",
+      links: [
+        { label: "About", href: "#" },
+        { label: "Privacy", href: "#" },
+        { label: "Terms", href: "#" },
+        { label: "Contact", href: "#" }
+      ],
+      copyright: "© {year} Seyu. All rights reserved."
+    }
+  };
+
   try {
-    console.log(`Fetching sheet data from: ${url}`);
-    const response = await fetch(url);
+    console.log('Fetching sheet data from:', SHEET_URL);
+    const response = await fetch(SHEET_URL);
     
     if (!response.ok) {
-      throw new Error(`Failed to fetch sheet: ${response.status} ${response.statusText}`);
+      console.warn('Failed to fetch sheet data, using default content');
+      return defaultContent;
     }
-    
+
     const csvData = await response.text();
-    
-    // Parse CSV data
     const records = parse(csvData, {
       columns: true,
       skip_empty_lines: true
     });
-    
-    console.log(`Successfully parsed ${records.length} records from sheet`);
-    return records;
-  } catch (error) {
-    console.error(`Error fetching sheet from ${url}:`, error);
-    return [];
-  }
-}
 
-/**
- * Fetches data from all individual sheets
- * @returns {Array} - Array of all records from all sheets
- */
-async function fetchAllSheets() {
-  try {
-    const allRecords = [];
-    
-    // Fetch data from each sheet in parallel
-    const sheetPromises = Object.entries(SHEET_URLS).map(async ([sheetName, url]) => {
-      try {
-        const records = await fetchSingleSheet(url);
-        console.log(`Fetched ${records.length} records from ${sheetName} sheet`);
-        return records;
-      } catch (error) {
-        console.error(`Failed to fetch ${sheetName} sheet:`, error);
-        return [];
-      }
-    });
-    
-    // Wait for all sheet data to be fetched
-    const sheetResults = await Promise.all(sheetPromises);
-    
-    // Combine all records
-    sheetResults.forEach(records => {
-      allRecords.push(...records);
-    });
-    
-    console.log(`Combined ${allRecords.length} total records from all sheets`);
-    return allRecords;
-  } catch (error) {
-    console.error("Error fetching all sheets:", error);
-    throw error;
-  }
-}
+    console.log(`Fetched ${records.length} records from sheet`);
 
-/**
- * Fetches data using combined sheet as fallback if individual sheets fail
- * @returns {Array} - Array of all records
- */
-async function fetchSheetDataWithFallback() {
-  try {
-    // Try individual sheets first
-    const records = await fetchAllSheets();
-    
-    // If we got data from individual sheets, return it
-    if (records && records.length > 0) {
-      return records;
-    }
-    
-    // Fallback to combined sheet
-    console.log("No data from individual sheets, trying combined sheet URL");
-    return await fetchSingleSheet(COMBINED_SHEET_URL);
-  } catch (error) {
-    console.error("Error in fetchSheetDataWithFallback:", error);
-    // Final fallback - try the combined sheet directly
-    return await fetchSingleSheet(COMBINED_SHEET_URL);
-  }
-}
-
-export async function fetchSheetData() {
-  try {
-    // Get all records from sheets
-    const records = await fetchSheetDataWithFallback();
-    
     if (!records || records.length === 0) {
-      console.error("No data returned from any sheets");
-      throw new Error("No data available from Google Sheets");
+      console.warn('No data in sheet, using default content');
+      return defaultContent;
     }
-    // Initialize content structure to match content.json
-    const content = {
-      meta: { title: "" },
-      header: { logo: "", navigation: [] },
-      hero: { title: "", subtitle: "", description: "", buttons: [] },
-      features: { title: "", items: [], buttons: [] },
-      statistics: { items: [] },
-      footer: { logo: "", links: [], copyright: "" }
-    };
+
+    // Initialize content structure with default values
+    const content = {...defaultContent};
 
     // Temporary storage for grouped items
     const navItems = [];
@@ -129,53 +107,55 @@ export async function fetchSheetData() {
     const featureButtons = [];
     const statItems = [];
     const footerLinks = [];
-
     records.forEach(record => {
-      const section = record.section;
-      const key = record.key;
-      const value = record.value;
+      const section = record.section?.toLowerCase();
+      const key = record.key?.toLowerCase();
 
       switch(section) {
         case 'meta':
           if (key === 'title') {
-            content.meta.title = value;
+            content.meta.title = record.value || content.meta.title;
           }
           break;
 
         case 'header':
           if (key === 'logo') {
-            content.header.logo = value;
+            content.header.logo = record.label || content.header.logo;
           } else if (key === 'navigation_item') {
             navItems.push({
-              label: record.label,
-              href: record.href
+              label: record.label || "",
+              href: record.href || "#"
             });
           }
           break;
 
         case 'hero':
-          if (['title', 'subtitle', 'description'].includes(key)) {
-            content.hero[key] = value;
+          if (key === 'title') {
+            content.hero.title = record.title || content.hero.title;
+          } else if (key === 'subtitle') {
+            content.hero.subtitle = record.subtitle || content.hero.subtitle;
+          } else if (key === 'description') {
+            content.hero.description = record.description || content.hero.description;
           } else if (key === 'button') {
             heroButtons.push({
-              label: record.label,
-              type: record.type
+              label: record.label || "",
+              type: record.type || "primary"
             });
           }
           break;
 
         case 'features':
           if (key === 'title') {
-            content.features.title = value;
+            content.features.title = record.title || content.features.title;
           } else if (key === 'item') {
             featureItems.push({
-              title: record.title,
-              description: record.description
+              title: record.title || "",
+              description: record.description || ""
             });
           } else if (key === 'button') {
             featureButtons.push({
-              label: record.label,
-              type: record.type
+              label: record.label || "",
+              type: record.type || "primary"
             });
           }
           break;
@@ -183,86 +163,40 @@ export async function fetchSheetData() {
         case 'statistics':
           if (key === 'item') {
             statItems.push({
-              number: record.number,
-              label: record.label
+              number: record.number || "",
+              label: record.label || ""
             });
           }
           break;
 
         case 'footer':
           if (key === 'logo') {
-            content.footer.logo = value;
+            content.footer.logo = record.value || content.footer.logo;
           } else if (key === 'copyright') {
-            content.footer.copyright = value;
+            content.footer.copyright = record.label || content.footer.copyright;
           } else if (key === 'link') {
             footerLinks.push({
-              label: record.label,
-              href: record.href
+              label: record.label || "",
+              href: record.href || "#"
             });
           }
           break;
       }
     });
 
-    // Assign collected arrays to their respective sections
-    content.header.navigation = navItems;
-    content.hero.buttons = heroButtons;
-    content.features.items = featureItems;
-    content.features.buttons = featureButtons;
-    content.statistics.items = statItems;
-    content.footer.links = footerLinks;
+    // Assign collected arrays to their respective sections only if we have new items
+    if (navItems.length > 0) content.header.navigation = navItems;
+    if (heroButtons.length > 0) content.hero.buttons = heroButtons;
+    if (featureItems.length > 0) content.features.items = featureItems;
+    if (featureButtons.length > 0) content.features.buttons = featureButtons;
+    if (statItems.length > 0) content.statistics.items = statItems;
+    if (footerLinks.length > 0) content.footer.links = footerLinks;
 
     return content;
   } catch (error) {
-    console.error('Error in fetchSheetData:', error);
+    console.error('Error fetching sheet data:', error);
     // Return default content structure as fallback
-    return {
-      meta: { title: "Seyu - Attract Fans!" },
-      header: { logo: "", navigation: [] },
-      hero: { title: "", subtitle: "", description: "", buttons: [] },
-      features: { title: "", items: [], buttons: [] },
-      statistics: { items: [] },
-      footer: { logo: "", links: [], copyright: "© 2023 Seyu. All rights reserved." }
-    };
-  }
-}
-
-/**
- * Validates the content structure to ensure all required fields are present
- * @param {Object} content - The content object to validate
- * @returns {Object} - The validated and possibly fixed content object
- */
-export function validateContent(content) {
-  try {
-    const defaultContent = {
-      meta: { title: "Seyu - Attract Fans!" },
-      header: { logo: "", navigation: [] },
-      hero: { title: "", subtitle: "", description: "", buttons: [] },
-      features: { title: "", items: [], buttons: [] },
-      statistics: { items: [] },
-      footer: { logo: "", links: [], copyright: "© 2023 Seyu. All rights reserved." }
-    };
-    
-    // Ensure each section exists
-    for (const section in defaultContent) {
-      if (!content[section]) {
-        console.warn(`Missing section: ${section}, using default`);
-        content[section] = defaultContent[section];
-      }
-      
-      // Ensure each property in the section exists
-      for (const prop in defaultContent[section]) {
-        if (content[section][prop] === undefined) {
-          console.warn(`Missing property: ${section}.${prop}, using default`);
-          content[section][prop] = defaultContent[section][prop];
-        }
-      }
-    }
-    
-    return content;
-  } catch (error) {
-    console.error('Error validating content:', error);
-    return content;
+    return defaultContent;
   }
 }
 
