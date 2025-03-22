@@ -8,13 +8,13 @@ export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#0D0D0D]">
+    <div className="min-h-screen bg-gradient-to-br from-[#110C9A] via-[#9B0F7A] to-[#F7870F]">
       <Head>
         <title>{content.meta.title}</title>
         <link rel="icon" href="/images/favicon.ico" />
       </Head>
       {/* Header */}
-      <header className="fixed w-full z-50 backdrop-blur-sm bg-black/20">
+      <header className="fixed w-full z-50 backdrop-blur-sm bg-gradient-to-r from-[#110C9A]/90 to-[#9B0F7A]/90">
         <nav className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <SlideInLeft>
@@ -34,7 +34,7 @@ export default function Home() {
                 index === content.header.navigation.length - 1 ? (
                   <SlideInRight key={index} delay={0.2 + (index * 0.1)}>
                     <Hover>
-                      <a href={item.href} className="px-6 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors">
+                      <a href={item.href} className="px-6 py-2 bg-gradient-to-r from-[#F7870F] to-[#FECF01] text-[#343434] font-semibold rounded-full hover:shadow-lg transition-all">
                         {item.label}
                       </a>
                     </Hover>
@@ -86,7 +86,7 @@ export default function Home() {
             <FadeIn delay={0.4}>
               <div className="flex flex-col md:flex-row gap-6 justify-center">
                 <Hover>
-                  <button className="px-8 py-4 bg-blue-600 text-white rounded-full text-lg font-semibold hover:bg-blue-700 transition-colors">
+                  <button className="px-8 py-4 bg-gradient-to-r from-[#F7870F] to-[#FECF01] text-[#343434] rounded-full text-lg font-semibold hover:shadow-lg transition-all">
                     {content.hero.buttons[0].label}
                   </button>
                 </Hover>
@@ -114,7 +114,7 @@ export default function Home() {
             {content.features.items.map((feature, index) => (
               <FadeIn key={index} delay={index * 0.2}>
                 <Hover>
-                  <div className="p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-blue-500/50 transition-colors">
+                  <div className="p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-[#F7870F]/50 transition-colors">
                     <h3 className="text-xl font-semibold text-white mb-4">{feature.title}</h3>
                     <p className="text-gray-400">{feature.description}</p>
                   </div>
@@ -126,7 +126,7 @@ export default function Home() {
       </section>
 
       {/* Statistics Section */}
-      <section className="py-20 bg-gradient-to-b from-blue-900/20 to-purple-900/20">
+      <section className="py-20 bg-gradient-to-b from-[#110C9A]/20 to-[#9B0F7A]/20">
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-3 gap-8 text-center">
             {content.statistics.items.map((stat, index) => (
@@ -142,7 +142,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-black/40 py-12 mt-20">
+      <footer className="bg-gradient-to-r from-[#110C9A]/90 to-[#9B0F7A]/90 py-12 mt-20">
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <FadeIn>

@@ -5,17 +5,21 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {
       colors: {
         primary: {
-          DEFAULT: '#2B8FE8',
-          dark: '#1B77C7',
-          light: '#4BA3EE'
+          DEFAULT: '#F7870F',
+          dark: '#9B0F7A',
+          light: '#FECF01'
         },
         secondary: {
-          DEFAULT: '#1A1C26',
-          dark: '#12141B',
-          light: '#222534'
+          DEFAULT: '#110C9A',
+          dark: '#0D0A77',
+          light: '#3931B8'
+        },
+        text: {
+          DEFAULT: '#343434',
+          light: '#FFFFFF'
+        },
         },
         neutral: {
           50: '#F9F9F9',
@@ -32,7 +36,7 @@ module.exports = {
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-primary': 'linear-gradient(45deg, #2B8FE8 0%, #4BA3EE 100%)',
+        'gradient-primary': 'linear-gradient(45deg, #110C9A 0%, #9B0F7A 26%, #F7870F 71%, #FECF01 100%)',
       },
       animation: {
         'gradient': 'gradient 15s ease infinite',
@@ -50,7 +54,10 @@ module.exports = {
         }
       },
       boxShadow: {
-        'glow': '0 0 20px rgba(59, 130, 246, 0.5)',
+        'glow': '0 0 20px rgba(247, 135, 15, 0.5)',
+      },
+      fontFamily: {
+        sans: ['Montserrat', 'sans-serif'],
       }
     },
   },

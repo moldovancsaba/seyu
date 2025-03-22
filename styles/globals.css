@@ -3,14 +3,14 @@
 @tailwind utilities;
 
 :root {
-  --gradient-1: linear-gradient(45deg, #00C6FF, #0072FF);
+  --gradient-1: linear-gradient(45deg, #110C9A 0%, #9B0F7A 26%, #F7870F 71%, #FECF01 100%);
   --gradient-2: linear-gradient(45deg, #FF416C, #FF4B2B);
 }
 
 body {
   background: #000;
-  color: #fff;
-  font-family: 'Inter', sans-serif;
+  color: #343434;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .hero-gradient {
