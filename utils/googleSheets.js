@@ -9,7 +9,7 @@ export async function fetchSheetData() {
       title: "Seyu - Attract Fans!" 
     },
     header: { 
-      logo: "/images/seyu_logo_horizontal_white.PNG",
+      logo: "/images/seyu_logo.png",
       navigation: [],
       buttons: []
     },
@@ -68,12 +68,12 @@ export async function fetchSheetData() {
       ]
     },
     footer: { 
-      logo: "Seyu",
+      logo: "/images/seyu_logo.png",
       links: [
-        { label: "About", href: "#" },
-        { label: "Privacy", href: "#" },
-        { label: "Terms", href: "#" },
-        { label: "Contact", href: "#" }
+        { value: "About", href: "#" },
+        { value: "Privacy", href: "#" },
+        { value: "Terms", href: "#" },
+        { value: "Contact", href: "#" }
       ],
       copyright: "© {year} Seyu. All rights reserved."
     }

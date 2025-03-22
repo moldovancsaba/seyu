@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { FadeIn, ScaleIn, SlideInLeft, SlideInRight, Hover } from '../components/Animation';
 import Head from 'next/head';
 import Image from 'next/image';
-import Logo from '../images/seyu_logo_horizontal_white.PNG';
 import { fetchSheetData } from '../utils/googleSheets';
 
 export async function getStaticProps() {
@@ -226,18 +225,18 @@ export default function Home({ content, error }) {
             <FadeIn>
               <div className="mb-8 md:mb-0">
                 <Image 
-                  src={Logo} 
-                  alt={content.footer.logo} 
-                  width={180} 
-                  height={40} 
-                  className="h-[24px] md:h-[40px] w-auto" 
+                  src={content.footer.logo}
+                  alt="Seyu Logo"
+                  width={180}
+                  height={40}
+                  className="h-[24px] md:h-[40px] w-auto"
                 />
               </div>
             </FadeIn>
             <div className="flex flex-wrap gap-8 text-gray-400">
               {content.footer.links.map((item, index) => (
                 <FadeIn key={index} delay={index * 0.1}>
-                  <a href={item.href} className="hover:text-white transition-colors">{item.label}</a>
+                  <a href={item.href} className="hover:text-white transition-colors">{item.value}</a>
                 </FadeIn>
               ))}
             </div>
