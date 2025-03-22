@@ -3,9 +3,36 @@ import { FadeIn, ScaleIn, SlideInLeft, SlideInRight, Hover } from '../components
 import Head from 'next/head';
 import Image from 'next/image';
 import Logo from '../images/seyu_logo_horizontal_white.PNG';
-import content from '../content.json';
-export default function Home() {
+import { fetchSheetData } from '../utils/googleSheets';
+
+export async function getStaticProps() {
+  try {
+    const content = await fetchSheetData();
+    return {
+      props: {
+        content,
+      },
+      // Revalidate every hour
+      revalidate: 3600,
+    };
+  } catch (error) {
+    console.error('Error fetching content:', error);
+    return {
+      props: {
+        error: 'Failed to load content',
+      },
+    };
+  }
+}
+
+export default function Home({ content, error }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  if (error) {
+    return <div className="min-h-screen flex items-center justify-center text-xl text-white bg-gradient-to-br from-[#110C9A] via-[#9B0F7A] to-[#F7870F]">
+      Error loading content. Please try again later.
+    </div>;
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#110C9A] via-[#9B0F7A] to-[#F7870F]">
