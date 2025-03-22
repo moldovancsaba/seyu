@@ -22,9 +22,9 @@ export default function Home() {
                 <Image 
                   src={Logo} 
                   alt={content.header.logo} 
-                  width={60} 
-                  height={20} 
-                  className="w-[36px] h-[12px] md:w-[60px] md:h-[20px]" 
+                  width={40} 
+                  height={40} 
+                  className="w-[24px] h-[24px] md:w-[40px] md:h-[40px]" 
                   priority 
                 />
               </a>
@@ -150,9 +150,9 @@ export default function Home() {
                 <Image 
                   src={Logo} 
                   alt={content.footer.logo} 
-                  width={60} 
-                  height={20} 
-                  className="w-[36px] h-[12px] md:w-[60px] md:h-[20px]" 
+                  width={40} 
+                  height={40} 
+                  className="w-[24px] h-[24px] md:w-[40px] md:h-[40px]" 
                 />
               </div>
             </FadeIn>
