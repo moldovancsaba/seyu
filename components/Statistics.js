@@ -38,13 +38,13 @@ const Statistics = ({ content }) => {
               <a
                 key={index}
                 href={button.href || "#"}
-                className={`rounded-md px-3.5 py-2.5 text-sm font-semibold shadow-sm ${
+                className={\`rounded-md px-3.5 py-2.5 text-sm font-semibold shadow-sm \${
                   button.type === "primary"
                     ? "bg-primary-600 text-white hover:bg-primary-500"
                     : "bg-white text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                }`}
+                }\`}
               >
-                {button.label || button.value}
+                {button.value}
               </a>
             ))}
           </div>
