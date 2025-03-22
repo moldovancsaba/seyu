@@ -124,7 +124,7 @@ export async function fetchSheetData() {
       switch(section) {
         case 'meta':
           if (key === 'title') {
-            content.meta.title = record.value || content.meta.title;
+            content.meta.title = record.title || content.meta.title;
           }
           break;
 
@@ -145,7 +145,7 @@ export async function fetchSheetData() {
           } else if (key === 'subtitle') {
             content.hero.subtitle = record.subtitle || content.hero.subtitle;
           } else if (key === 'description') {
-            content.hero.description = record.description || content.hero.description;
+            content.hero.description = record.value || content.hero.description;
           } else if (key === 'button') {
             heroButtons.push({
               label: record.label || "",
@@ -160,7 +160,7 @@ export async function fetchSheetData() {
             content.features.title = record.title || content.features.title;
           } else if (key === 'item') {
             featureItems.push({
-              title: record.title || "",
+              title: record.subtitle || "",
               value: record.value || ""
             });
           } else if (key === 'button') {
@@ -177,7 +177,7 @@ export async function fetchSheetData() {
             content.statistics.title = record.title || content.statistics.title;
           } else if (key === 'item') {
             statItems.push({
-              title: record.title || "",
+              title: record.subtitle || "",
               subtitle: record.subtitle || "",
               value: record.value || ""
             });
@@ -194,10 +194,10 @@ export async function fetchSheetData() {
           if (key === 'logo') {
             content.footer.logo = record.value || content.footer.logo;
           } else if (key === 'copyright') {
-            content.footer.copyright = record.label || content.footer.copyright;
+            content.footer.copyright = record.value || content.footer.copyright;
           } else if (key === 'link') {
             footerLinks.push({
-              label: record.label || "",
+              label: record.value || "",
               href: record.href || "#"
             });
           }
