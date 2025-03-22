@@ -97,7 +97,7 @@ export async function fetchSheetData() {
       skip_empty_lines: true
     });
 
-    console.log(\`Fetched \${records.length} records from sheet\`);
+    console.log(`Fetched ${records.length} records from sheet`);
 
     if (!records || records.length === 0) {
       console.warn('No data in sheet, using default content');
