@@ -9,7 +9,7 @@ export async function fetchSheetData() {
       title: "Seyu - Attract Fans!" 
     },
     header: { 
-      logo: "/images/seyu_logo.png",
+      logo: "/images/seyu_logo_horizontal_white.PNG",
       navigation: [],
       buttons: []
     },
@@ -68,7 +68,7 @@ export async function fetchSheetData() {
       ]
     },
     footer: { 
-      logo: "/images/seyu_logo.png",
+      logo: "/images/seyu_logo_horizontal_white.PNG",
       links: [
         { value: "About", href: "#" },
         { value: "Privacy", href: "#" },
@@ -89,6 +89,7 @@ export async function fetchSheetData() {
     }
 
     const csvData = await response.text();
+    console.log('Raw CSV data:', csvData);
     const records = parse(csvData, {
       columns: true,
       skip_empty_lines: true
