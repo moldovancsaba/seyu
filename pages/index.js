@@ -154,7 +154,7 @@ export default function Home({ content, error }) {
                 <Hover>
                   <div className="p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-[#F7870F]/50 transition-colors">
                     <h3 className="text-xl font-semibold text-white mb-4">{feature.title}</h3>
-                    <p className="text-gray-400">{feature.description}</p>
+                    <p className="text-gray-400">{feature.value}</p>
                   </div>
                 </Hover>
               </FadeIn>

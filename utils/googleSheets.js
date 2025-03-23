@@ -96,6 +96,7 @@ export async function fetchSheetData() {
     });
 
     console.log(`Fetched ${records.length} records from sheet`);
+    console.log('Features data:', records.filter(record => record.section === 'features'));
 
     if (!records || records.length === 0) {
       console.warn('No data in sheet, using default content');
